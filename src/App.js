@@ -1,9 +1,12 @@
 import React from 'react';
+import { Route } from "react-router-dom";
+
+import { Auth } from './pages';
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Hellow World!</h1>
+    <div className="wrapper">
+      <Route exact path={["/signup", "/signin", "/"]} component={Auth} />
     </div>
   );
 }
