@@ -15,7 +15,7 @@ const RegistrationForm = props => {
               <FormGroup className="text-left">
                 <Input
                   type="text"
-                  name="text"
+                  name="login"
                   placeholder="Ваш логин"
                   bsSize="lg"
                 />
@@ -45,7 +45,7 @@ const RegistrationForm = props => {
               <FormGroup className="text-left">
                 <Input
                   type="password"
-                  name="password"
+                  name="password_2"
                   placeholder="Повторите пароль"
                   bsSize="lg"
                 />
