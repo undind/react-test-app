@@ -1,49 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
-import db from 'db';
-
 import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
-import useValidateForm from 'hooks/useValidateForm';
-import validateLogin from 'utils/validateLogin';
 
-const LoginForm = props => {
-  const [errMessage, setErrMessage] = useState(false);
-
-  const INITIAL_STATE = {
-    login: '',
-    password: ''
-  }
-
-  const submitFunction = async () => {
-    const { login, password } = values;
-    
-    await db.users
-      .get({ login, password })
-      .then((user) => {
-        if (user.login === login && user.password === password) {
-          window.localStorage.setItem('isAuth', 'true');
-          props.history.push('/')
-        }
-      })
-      .catch(() => {
-        values.password = "";
-        setErrMessage(true);
-        setTimeout(() => {
-          setErrMessage(false)
-        }, 3000);
-      })
-  }
-
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    isSubmitting
-  } = useValidateForm(INITIAL_STATE, validateLogin, submitFunction);
-
+const LoginForm = ({ handleSubmit, handleChange, handleBlur, values, errors, isSubmitting, errMessage }) => {
   return (
     <Container className="vh-100">
       {errMessage && <Alert color="danger" className="text-center fixed-top">

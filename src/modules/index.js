@@ -1,2 +1,2 @@
-export { default as LoginForm } from './LoginForm/LoginForm.jsx';
-export { default as RegistrationForm } from './RegistrationForm/RegistrationForm.jsx';
+export { default as LoginFormContainer } from './LoginForm';
+export { default as RegistrationFormContainer } from './RegistrationForm';

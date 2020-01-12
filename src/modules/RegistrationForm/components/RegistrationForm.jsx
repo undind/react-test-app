@@ -1,49 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
-import db from 'db';
-
 import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
-import useValidateForm from 'hooks/useValidateForm';
-import validateRegistration from 'utils/validateRegistration';
 
-const RegistrationForm = props => {
-  const [errMessage, setErrMessage] = useState(false);
-
-  const INITIAL_STATE = {
-    login: '',
-    email: '',
-    password: '',
-    password_2: ''
-  }
-
-  const submitFunction = async () => {
-    const { login, email, password, password_2 } = values;
-
-    await db.users
-      .add({ login, email, password, password_2 })
-      .then(() => {
-        props.history.push('/signin')
-      })
-      .catch(() => {
-        values.password = "";
-        values.password_2 = "";
-        setErrMessage(true);
-        setTimeout(() => {
-          setErrMessage(false)
-        }, 3000);
-      })
-  }
-
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    isSubmitting
-} = useValidateForm(INITIAL_STATE, validateRegistration, submitFunction);
-
+const RegistrationForm = ({ handleSubmit, handleChange, handleBlur, errors, isSubmitting, errMessage, values }) => {
   return (
     <Container className="vh-100">
       {errMessage && <Alert color="danger" className="text-center fixed-top">
