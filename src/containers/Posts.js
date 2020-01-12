@@ -18,7 +18,7 @@ const Posts = (props) => {
         setError(true);
         setLoading(false);
       })
-  }, []);
+  }, [setPosts]);
 
   return (
     <BasePosts 

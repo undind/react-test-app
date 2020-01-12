@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import db from 'db';
 
-import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
+import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
 import useValidateForm from 'hooks/useValidateForm';
 import validateRegistration from 'utils/validateRegistration';
 
 const RegistrationForm = props => {
+  const [errMessage, setErrMessage] = useState(false);
+
   const INITIAL_STATE = {
     login: '',
     email: '',
@@ -23,8 +25,13 @@ const RegistrationForm = props => {
       .then(() => {
         props.history.push('/signin')
       })
-      .catch((e) => {
-        console.log(e)
+      .catch(() => {
+        values.password = "";
+        values.password_2 = "";
+        setErrMessage(true);
+        setTimeout(() => {
+          setErrMessage(false)
+        }, 3000);
       })
   }
 
@@ -39,6 +46,9 @@ const RegistrationForm = props => {
 
   return (
     <Container className="vh-100">
+      {errMessage && <Alert color="danger" className="text-center fixed-top">
+        Произошла ошибка при обработке данных или такое пользователь уже существует!
+      </Alert>}
       <div className="d-flex align-items-center justify-content-center h-100">
         <div className="text-center">
           <h2>Регистрация</h2>

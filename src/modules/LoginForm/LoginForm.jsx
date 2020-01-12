@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import db from 'db';
 
-import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
+import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
 import useValidateForm from 'hooks/useValidateForm';
 import validateLogin from 'utils/validateLogin';
 
 const LoginForm = props => {
+  const [errMessage, setErrMessage] = useState(false);
+
   const INITIAL_STATE = {
     login: '',
     password: ''
@@ -25,7 +27,11 @@ const LoginForm = props => {
         }
       })
       .catch(() => {
-        alert('Такого пользователя не существует или допущенна ошибка при вводе данных')
+        values.password = "";
+        setErrMessage(true);
+        setTimeout(() => {
+          setErrMessage(false)
+        }, 3000);
       })
   }
 
@@ -40,6 +46,9 @@ const LoginForm = props => {
 
   return (
     <Container className="vh-100">
+      {errMessage && <Alert color="danger" className="text-center fixed-top">
+        Введен не верный логин или пароль!
+      </Alert>}
       <div className="d-flex align-items-center justify-content-center h-100">
         <div className="text-center">
           <h2>Вход в аккаунт</h2>

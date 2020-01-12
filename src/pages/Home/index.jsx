@@ -1,9 +1,14 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
-import { Container, NavItem, Navbar, NavLink } from 'reactstrap';
+import { Container, NavItem, Navbar } from 'reactstrap';
 import { Posts } from 'containers';
 
 const Home = () => {
+  const logOut = () => {
+    window.localStorage.setItem('isAuth', 'false');
+  }
+
   return (
     <section>
       <div className="bg-secondary">
@@ -16,7 +21,7 @@ const Home = () => {
               <input type="text" placeholder="Поиск" className="form-control" />
             </NavItem>
             <NavItem className="col-3 d-flex">
-              <NavLink className="text-success d-inline ml-auto" href="/">Выйти</NavLink>
+              <Link className="text-success d-inline ml-auto" onClick={logOut} to='/signin'>Выйти</Link>
             </NavItem>
           </Navbar>
         </Container>
