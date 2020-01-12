@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import db from 'db';
+
 import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import useValidateForm from 'hooks/useValidateForm';
-import validate from 'utils/validate';
+import validateRegistration from 'utils/validateRegistration';
 
 const RegistrationForm = props => {
   const INITIAL_STATE = {
@@ -13,10 +15,17 @@ const RegistrationForm = props => {
     password_2: ''
   }
 
-  const submitFunction = () => {
+  const submitFunction = async () => {
     const { login, email, password, password_2 } = values;
-    console.log(login, email, password, password_2)
-    // props.history.push('/signin');
+
+    await db.users
+      .add({ login, email, password, password_2 })
+      .then(() => {
+        props.history.push('/signin')
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   const {
@@ -26,7 +35,7 @@ const RegistrationForm = props => {
     values,
     errors,
     isSubmitting
-} = useValidateForm(INITIAL_STATE, validate, submitFunction);
+} = useValidateForm(INITIAL_STATE, validateRegistration, submitFunction);
 
   return (
     <Container className="vh-100">

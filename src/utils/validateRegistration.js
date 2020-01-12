@@ -11,8 +11,8 @@ const validate = (values) => {
     errors.email = "Не корректный email";
   }
 
-  if (values.password.length < 5) {
-    errors.password = "Минимальная длина 5 символов";
+  if (values.password.length < 6) {
+    errors.password = "Минимальная длина 6 символов";
   } else if (values.password.length > 16) {
     errors.password = "Максимальная длина 16 символов";
   }

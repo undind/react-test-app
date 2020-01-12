@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import db from 'db';
+
 import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import useValidateForm from 'hooks/useValidateForm';
-import validate from 'utils/validate';
+import validateLogin from 'utils/validateLogin';
 
 const LoginForm = props => {
   const INITIAL_STATE = {
@@ -11,9 +13,20 @@ const LoginForm = props => {
     password: ''
   }
 
-  const submitFunction = () => {
-    const { login, email } = values;
-    console.log(login, email)
+  const submitFunction = async () => {
+    const { login, password } = values;
+    
+    await db.users
+      .get({ login, password })
+      .then((user) => {
+        if (user.login === login && user.password === password) {
+          window.localStorage.setItem('isAuth', 'true');
+          props.history.push('/')
+        }
+      })
+      .catch(() => {
+        alert('Такого пользователя не существует или допущенна ошибка при вводе данных')
+      })
   }
 
   const {
@@ -23,7 +36,7 @@ const LoginForm = props => {
     values,
     errors,
     isSubmitting
-  } = useValidateForm(INITIAL_STATE, validate, submitFunction);
+  } = useValidateForm(INITIAL_STATE, validateLogin, submitFunction);
 
   return (
     <Container className="vh-100">

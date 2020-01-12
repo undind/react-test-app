@@ -1,13 +1,15 @@
 import React from 'react';
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import { Auth, Home } from './pages';
 
 const App = () => {
+  const isAuth = window.localStorage.getItem('isAuth')
+
   return (
     <div className="wrapper">
-      <Route exact path={["/signup", "/signin", "/"]} component={Auth} />
-      <Route exact path={["/home"]} component={Home} />
+      <Route path={["/signup", "/signin"]} component={Auth} />
+      <Route path="/" render={ () => ( isAuth === 'true' ? <Home/> : <Redirect to="/signin" /> ) } />
     </div>
   );
 }
