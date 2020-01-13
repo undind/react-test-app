@@ -13,21 +13,19 @@ const Home = () => {
     <section>
       <div className="bg-secondary">
         <Container>
-          <Navbar>
-            <NavItem className="text-white col-3">
-              Иван Иванов
-            </NavItem>
-            <NavItem className="col-6">
-              <input type="text" placeholder="Поиск" className="form-control" />
+          <Navbar className="p-3">
+            <NavItem className="col-9">
+              <p className="font-weight-bold p-0 m-0 text-white">Домашняя страница</p>
             </NavItem>
             <NavItem className="col-3 d-flex">
-              <Link className="text-success d-inline ml-auto" onClick={logOut} to='/signin'>Выйти</Link>
+              <Link className="text-success d-inline ml-auto font-weight-bold" onClick={logOut} to='/signin'>Выйти</Link>
             </NavItem>
           </Navbar>
         </Container>
       </div>
 
       <Posts />
+
     </section>
   )
 };

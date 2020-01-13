@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { Pagination } from 'components';
 import { Container, Spinner } from 'reactstrap';
 
 const Posts = ({ posts, isLoading, isError }) => {
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const [ postsPerPage ] = useState(5);
+  const [ searchValue, setSearchValue ] = useState("");
+  const handleSearchInputChanges = (e) => {
+    setSearchValue(e.target.value);
+  }
+
+  const filteredPosts = posts.filter(post => post.title.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g,'').toLowerCase()) || 
+                                              post.text.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g,'').toLowerCase()))
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return (
     <div>
       <Container>
@@ -15,14 +32,26 @@ const Posts = ({ posts, isLoading, isError }) => {
               <p>Загрузка ...</p>
             </div>
           ) : (
-            <ul className="mt-2 p-0">
-              {posts.map(post => (
-                <li key={post.id}>
-                  <h2 className="text-center">{post.title}</h2>
-                  <p>{post.text}</p>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <div className="mt-4">
+                <input type="text" placeholder="Поиск" className="form-control" value={searchValue} onChange={handleSearchInputChanges} />
+              </div>
+              <Pagination 
+                postsPerPage={postsPerPage}
+                totalPosts={filteredPosts.length}
+                paginate={paginate}
+              />
+              <ul className="mt-3 p-0">
+                {!currentPosts.length ? (<h2 className="text-center">По Вашему запросу ничего не найдено</h2>
+                ) : (
+                  currentPosts.map(post => (
+                  <li key={post.id}>
+                    <h2 className="text-center">{post.title}</h2>
+                    <p>{post.text}</p>
+                  </li>
+                )))}
+              </ul>
+            </div>
           )}    
       </Container>
     </div>
@@ -30,11 +59,11 @@ const Posts = ({ posts, isLoading, isError }) => {
 }
 
 Posts.defaultProps = {
-  posts: [],
+  filteredPosts: [],
 }
 
 Posts.propTypes = {
-  posts: PropTypes.array,
+  filteredPosts: PropTypes.array,
   isLoading: PropTypes.bool,
   isError: PropTypes.bool
 };

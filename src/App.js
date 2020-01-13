@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <Switch>
-        <Route exact path={["/signup", "/signin"]} component={Auth} />
+        <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/" /> : <Auth /> ) } />
         <Route path="/" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
       </Switch>
     </div>
