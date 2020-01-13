@@ -1,32 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { postsAction } from 'redux/actions';
 
 import { Posts as BasePosts } from 'components';
 
-const Posts = () => {
-  const [ posts, setPosts ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-  const [ isErorr, setError ] = useState(false);
+const Posts = ({ fetchPosts, posts, isError }) => {
+  const [ loading ] = useState(true);
+
+  console.log(isError)
   
   useEffect(() => {
-    fetch("http://www.mocky.io/v2/5d9dc38e3200004e00329939")
-      .then(res => res.json())
-      .then(data => {
-        setPosts(data.data);
-        setLoading(false);
-      })
-      .catch(e => {
-        setError(true);
-        setLoading(false);
-      })
-  }, [setPosts]);
+    fetchPosts()
+  }, [fetchPosts]);
 
   return (
     <BasePosts 
       posts={posts}
       isLoading={loading}
-      isError={isErorr}
+      isError={isError}
     />
   );
 }
 
-export default Posts;
+export default connect(({ posts }) => posts, postsAction)(Posts);

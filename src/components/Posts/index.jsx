@@ -7,6 +7,7 @@ import { Container, Spinner } from 'reactstrap';
 const Posts = ({ posts, isLoading, isError }) => {
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ postsPerPage ] = useState(5);
+  
   const [ searchValue, setSearchValue ] = useState("");
   const handleSearchInputChanges = (e) => {
     setSearchValue(e.target.value);
@@ -64,6 +65,7 @@ Posts.defaultProps = {
 
 Posts.propTypes = {
   filteredPosts: PropTypes.array,
+  posts: PropTypes.array,
   isLoading: PropTypes.bool,
   isError: PropTypes.bool
 };

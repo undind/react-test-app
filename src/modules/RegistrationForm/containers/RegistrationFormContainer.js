@@ -7,7 +7,7 @@ import useValidateForm from 'hooks/useValidateForm';
 import validateRegistration from 'utils/validateRegistration';
 
 const RegistrationFormContainer = props => {
-  const [errMessage, setErrMessage] = useState(false);
+  const [ errMessage, setErrMessage ] = useState(false);
 
   const INITIAL_STATE = {
     login: '',

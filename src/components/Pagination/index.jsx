@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
@@ -20,6 +21,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       </ul>
     </nav>
   );
+};
+
+Pagination.propTypes = {
+  postsPerPage: PropTypes.number,
+  totalPosts: PropTypes.number,
+  paginate: PropTypes.func
 };
 
 export default Pagination;
