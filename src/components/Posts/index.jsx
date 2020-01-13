@@ -13,15 +13,15 @@ const Posts = ({ posts, isLoading, isError }) => {
     setSearchValue(e.target.value);
   }
 
-  const filteredPosts = posts.filter(post => post.title.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g,'').toLowerCase()) || 
-                                              post.text.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g,'').toLowerCase()))
+  const filteredPosts = posts.filter(post => post.title.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g, '').toLowerCase()) || 
+                                              post.text.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g, '').toLowerCase()))
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
+  
   return (
     <div>
       <Container>
@@ -43,11 +43,19 @@ const Posts = ({ posts, isLoading, isError }) => {
                 paginate={paginate}
               />
               <ul className="mt-3 p-0">
-                {!currentPosts.length ? (<h2 className="text-center">По Вашему запросу ничего не найдено</h2>
+                {!currentPosts.length && !filteredPosts.length ? ( 
+                  <h2 className="text-center">Ничего не найдено</h2> 
+                ) : !currentPosts.length ? (
+                  filteredPosts.map(post => (
+                    <li key={post.id}>
+                      <h3 className="text-center">{post.title}</h3>
+                      <p>{post.text}</p>
+                    </li>
+                  ))
                 ) : (
                   currentPosts.map(post => (
                   <li key={post.id}>
-                    <h2 className="text-center">{post.title}</h2>
+                    <h3 className="text-center">{post.title}</h3>
                     <p>{post.text}</p>
                   </li>
                 )))}

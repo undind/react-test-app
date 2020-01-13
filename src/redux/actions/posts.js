@@ -11,13 +11,20 @@ const Actions = {
     payload: bool
   }),
 
+  setIsLoading: bool => ({
+    type: "POSTS:IS_LOADING",
+    payload: bool
+  }),
+
   fetchPosts: () => dispatch => {
+    dispatch(Actions.setIsLoading(true))
     postsAPI.getAll().then(({ data }) => {
       if (data.status === 'ok') {
+        dispatch(Actions.setIsLoading(false))
         dispatch(Actions.setPosts(data.data))
-        dispatch(Actions.setIsError(false))
       }
     }).catch(() => {
+      dispatch(Actions.setIsLoading(false))
       dispatch(Actions.setIsError(true))
     })
   }

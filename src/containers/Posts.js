@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { postsAction } from 'redux/actions';
 
 import { Posts as BasePosts } from 'components';
 
-const Posts = ({ fetchPosts, posts, isError }) => {
-  const [ loading ] = useState(true);
-
-  console.log(isError)
+const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   
   useEffect(() => {
     fetchPosts()
@@ -17,7 +14,7 @@ const Posts = ({ fetchPosts, posts, isError }) => {
   return (
     <BasePosts 
       posts={posts}
-      isLoading={loading}
+      isLoading={isLoading}
       isError={isError}
     />
   );
