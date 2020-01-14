@@ -25,8 +25,8 @@ const Posts = ({ posts, isLoading, isError }) => {
   return (
     <div>
       <Container>
-        { isError && <h2 className="mt-5 text-center text-info">Что-то пошло не так ...</h2> }
-        { isLoading && !posts.length ? 
+        
+        { isError ? ( <h2 className="mt-5 text-center text-info">Что-то пошло не так ...</h2> ) : isLoading && !posts.length ? 
           (
             <div className="h-100 d-flex flex-column align-items-center justify-content-center mt-5">
               <Spinner style={{ width: '6rem', height: '6rem' }} type="grow" color="primary" />

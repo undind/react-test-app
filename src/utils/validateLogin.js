@@ -1,4 +1,4 @@
-const validate = (values) => {
+const validateLogin = (values) => {
   const errors = {};
 
   if (!values.login) {
@@ -14,4 +14,4 @@ const validate = (values) => {
   return errors;
 }
 
-export default validate;
+export default validateLogin;
