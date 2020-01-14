@@ -7,8 +7,8 @@
 
 ##  Чтобы развернуть проект необходимо:
 ```sh
-$ git clone https://github.com/undind/first-react-app.git
-$ cd first-react-app
+$ git clone https://github.com/undind/react-test-app.git
+$ cd react-test-app
 $ yarn or npm install
 ```
 
