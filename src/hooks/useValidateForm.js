@@ -63,7 +63,8 @@ const useFormValidation = (initialState, validate, runOnSubmit) => {
     handleBlur,
     values,
     errors,
-    isSubmitting
+    isSubmitting,
+    setErrors
   };
 }
 

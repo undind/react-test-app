@@ -7,7 +7,10 @@ import useValidateForm from 'hooks/useValidateForm';
 import validateLogin from 'utils/validateLogin';
 
 const LoginFormContainer = props => {
-  const [errMessage, setErrMessage] = useState(false);
+  const [errMessage, setErrMessage] = useState({
+    status: false,
+    text: ''
+  });
 
   const INITIAL_STATE = {
     login: '',
@@ -16,22 +19,36 @@ const LoginFormContainer = props => {
 
   const submitFunction = async () => {
     const { login, password } = values;
-    
-    await db.users
-      .get({ login, password })
-      .then((user) => {
-        if (user.login === login && user.password === password) {
-          window.localStorage.setItem('isAuth', 'true');
-          props.history.push('/')
-        }
-      })
-      .catch(() => {
+
+    try {
+      const user = await db.users.where('login').equals(login).and(user => user.password === password).toArray();
+
+      if (user.length) {
+        window.localStorage.setItem('isAuth', 'true');
+        props.history.push('/');
+      } else {
         values.password = "";
-        setErrMessage(true);
+        setErrMessage({
+          status: true,
+          text: 'Введен не верный логин или пароль'
+        });
         setTimeout(() => {
-          setErrMessage(false)
+          setErrMessage({
+            status: false
+          });
         }, 3000);
-      })
+      }
+    } catch(e) {
+      setErrMessage({
+        status: true,
+        text: 'Ошибка при попытке авторизации'
+      });
+        setTimeout(() => {
+          setErrMessage({
+            status: false
+          });
+        }, 3000);
+    }
   }
 
   const {

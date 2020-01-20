@@ -6,8 +6,8 @@ import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstra
 const LoginForm = ({ handleSubmit, handleChange, handleBlur, values, errors, isSubmitting, errMessage }) => {
   return (
     <Container className="vh-100">
-      {errMessage && <Alert color="danger" className="text-center fixed-top">
-        Введен не верный логин или пароль!
+      {errMessage.status && <Alert color="danger" className="text-center fixed-top">
+        {errMessage.text}
       </Alert>}
       <div className="d-flex align-items-center justify-content-center h-100">
         <div className="text-center">
