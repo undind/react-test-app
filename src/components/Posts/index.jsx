@@ -1,26 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Pagination } from 'components';
 import { Container, Spinner } from 'reactstrap';
 
-const Posts = ({ posts, isLoading, isError }) => {
-  const [ currentPage, setCurrentPage ] = useState(1);
-  const [ postsPerPage ] = useState(5);
-  
-  const [ searchValue, setSearchValue ] = useState("");
-  const handleSearchInputChanges = (e) => {
-    setSearchValue(e.target.value);
-  }
-
-  const filteredPosts = posts.filter(post => post.title.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g, '').toLowerCase()) || 
-                                              post.text.replace(/\s/g,'').toLowerCase().includes(searchValue.replace(/\s/g, '').toLowerCase()))
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+const Posts = ({ posts, isLoading, isError, searchValue, handleSearchInputChanges, currentPosts, filteredPosts, paginate, postsPerPage }) => {
   
   return (
     <div>
