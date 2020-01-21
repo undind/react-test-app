@@ -20,10 +20,8 @@ const LoginFormContainer = props => {
   const submitFunction = async () => {
     const { login, password } = values;
 
-    try {
-      const user = await db.users.where('login').equals(login).and(user => user.password === password).toArray();
-
-      if (user.length) {
+    await db.users.get({login}, user => user.password === password).then((auth) => {
+      if (auth) {
         window.localStorage.setItem('isAuth', 'true');
         props.history.push('/');
       } else {
@@ -38,17 +36,18 @@ const LoginFormContainer = props => {
           });
         }, 3000);
       }
-    } catch(e) {
+    }).catch((e) => {
+      values.password = "";
       setErrMessage({
         status: true,
-        text: 'Ошибка при попытке авторизации'
+        text: 'Такой пользователь не зарегистрирован!'
       });
-        setTimeout(() => {
-          setErrMessage({
-            status: false
-          });
-        }, 3000);
-    }
+      setTimeout(() => {
+        setErrMessage({
+          status: false
+        });
+      }, 3000);
+    })
   }
 
   const {

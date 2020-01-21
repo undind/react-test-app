@@ -1,4 +1,4 @@
-import { postsAPI } from 'utils/api';
+import { postsAPI } from "utils/api";
 
 const Actions = {
   setPosts: posts => ({
@@ -17,17 +17,20 @@ const Actions = {
   }),
 
   fetchPosts: () => dispatch => {
-    dispatch(Actions.setIsLoading(true))
-    postsAPI.getAll().then(({ data }) => {
-      if (data.status === 'ok') {
-        dispatch(Actions.setIsLoading(false))
-        dispatch(Actions.setPosts(data.data))
-      }
-    }).catch(() => {
-      dispatch(Actions.setIsLoading(false))
-      dispatch(Actions.setIsError(true))
-    })
+    dispatch(Actions.setIsLoading(true));
+    postsAPI
+      .getAll()
+      .then(({ data }) => {
+        if (data.status === "ok") {
+          dispatch(Actions.setIsLoading(false));
+          dispatch(Actions.setPosts(data.data));
+        }
+      })
+      .catch(() => {
+        dispatch(Actions.setIsLoading(false));
+        dispatch(Actions.setIsError(true));
+      });
   }
-}
+};
 
 export default Actions;
