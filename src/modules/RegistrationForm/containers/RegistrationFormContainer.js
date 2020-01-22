@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormUI } from 'components';
+import FormUI from 'components/Form';
 
 import db from 'db';
 

@@ -1,14 +1,21 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { Container, NavItem, Navbar } from 'reactstrap';
+import { Container, Button, NavItem, Navbar } from 'reactstrap';
 import { Posts } from 'containers';
+import ModalWindow from 'components/Modal';
 
 const Home = () => {
+  const [ modal, setModal]  = useState(false);
+  let history = useHistory();
+
   const logOut = () => {
     window.localStorage.setItem('isAuth', 'false');
+    history.push('/signin');
   }
 
+  const onеToggleModal = () => setModal(!modal);
+  
   return (
     <section>
       <div className="bg-secondary">
@@ -18,9 +25,14 @@ const Home = () => {
               <p className="font-weight-bold p-0 m-0 text-white">Домашняя страница</p>
             </NavItem>
             <NavItem className="col-3 d-flex">
-              <Link className="text-success d-inline ml-auto font-weight-bold" onClick={logOut} to='/signin'>Выйти</Link>
+              <Button className="text-success d-inline ml-auto font-weight-bold" onClick={onеToggleModal}>Выйти</Button>
             </NavItem>
           </Navbar>
+          <ModalWindow
+            modal={modal}
+            logOut={logOut}
+            onеToggleModal={onеToggleModal}
+          />
         </Container>
       </div>
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { postsAction } from 'redux/actions';
 
-import { Posts as BasePosts } from 'components';
+import PostsUI from 'components/Posts/index.jsx';
 
 const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
 
@@ -29,7 +29,7 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <BasePosts 
+    <PostsUI 
       posts={posts}
       isLoading={isLoading}
       isError={isError}

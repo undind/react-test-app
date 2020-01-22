@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Pagination } from 'components';
+import Pagination from 'components/Pagination';
 import { Container, Spinner } from 'reactstrap';
 
-const Posts = ({ posts, isLoading, isError, searchValue, handleSearchInputChanges, currentPosts, filteredPosts, paginate, postsPerPage }) => {
+const PostsUI = ({ posts, isLoading, isError, searchValue, handleSearchInputChanges, currentPosts, filteredPosts, paginate, postsPerPage }) => {
   
   return (
     <div>
@@ -51,15 +51,15 @@ const Posts = ({ posts, isLoading, isError, searchValue, handleSearchInputChange
   );
 }
 
-Posts.defaultProps = {
+PostsUI.defaultProps = {
   filteredPosts: [],
 }
 
-Posts.propTypes = {
+PostsUI.propTypes = {
   filteredPosts: PropTypes.array,
   posts: PropTypes.array,
   isLoading: PropTypes.bool,
   isError: PropTypes.bool
 };
 
-export default Posts;
+export default PostsUI;
