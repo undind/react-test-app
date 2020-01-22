@@ -60,6 +60,40 @@ const RegistrationFormContainer = props => {
     isSubmitting
 } = useValidateForm(INITIAL_STATE, validateRegistration, submitFunction);
 
+const renderColumnForm = () => {
+  return [
+    {
+      name: 'login',
+      type: 'text',
+      placeholder: 'Ваш логин',
+      value: values.login,
+      error: errors.login
+    },
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'Ваша почта',
+      value: values.email,
+      error: errors.email
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: 'Ваш пароль',
+      value: values.password,
+      error: errors.password
+    },
+    {
+      name: 'password_2',
+      type: 'password_2',
+      placeholder: 'Повторите пароль',
+      value: values.password_2,
+      error: errors.password_2
+    },
+    
+  ]
+}
+
   return (
     <FormUI 
       handleSubmit={handleSubmit}
@@ -68,7 +102,7 @@ const RegistrationFormContainer = props => {
       errors={errors}
       values={values}
       isSubmitting={isSubmitting}
-      isRegistration
+      renderColumnForm={renderColumnForm}
     />
   )
 };

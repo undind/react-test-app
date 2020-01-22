@@ -10,8 +10,6 @@ const Home = () => {
   const [ modal, setModal]  = useState(false);
   let history = useHistory();
 
-  console.log(toast)
-
   const logOut = () => {
     toast.info("Вы покинули аккаунт!")
     window.localStorage.setItem('isAuth', 'false');

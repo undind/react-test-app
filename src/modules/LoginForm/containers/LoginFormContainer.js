@@ -41,6 +41,25 @@ const LoginFormContainer = props => {
     isSubmitting
   } = useValidateForm(INITIAL_STATE, validateLogin, submitFunction);
 
+  const renderColumnForm = () => {
+    return [
+      {
+        name: 'login',
+        type: 'text',
+        placeholder: 'Ваш логин',
+        value: values.login,
+        error: errors.login
+      },
+      {
+        name: 'password',
+        type: 'password',
+        placeholder: 'Ваш пароль',
+        value: values.password,
+        error: errors.password
+      }
+    ]
+  }
+
   return (
     <FormUI 
       handleSubmit={handleSubmit}
@@ -49,6 +68,7 @@ const LoginFormContainer = props => {
       values={values}
       errors={errors}
       isSubmitting={isSubmitting}
+      renderColumnForm={renderColumnForm}
       isLogin
     />
   )
