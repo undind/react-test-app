@@ -26,6 +26,8 @@ const Actions = {
           dispatch(Actions.setIsLoading(false));
           dispatch(Actions.setPosts(data.data));
         }
+
+        return data
       })
       .catch(() => {
         dispatch(Actions.setIsLoading(false));

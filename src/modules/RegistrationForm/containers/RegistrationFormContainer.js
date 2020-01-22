@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormUI from 'components/Form';
+import { toast } from "react-toastify";
 
 import db from 'db';
 
@@ -7,10 +8,6 @@ import useValidateForm from 'hooks/useValidateForm';
 import validateRegistration from 'utils/validateRegistration';
 
 const RegistrationFormContainer = props => {
-  const [ errMessage, setErrMessage ] = useState({
-    status: false,
-    text: ''
-  });
 
   const INITIAL_STATE = {
     login: '',
@@ -25,6 +22,7 @@ const RegistrationFormContainer = props => {
     await db.users
       .add({ login, email, password, password_2 })
       .then(() => {
+        toast.success("Регистрация прошла успешно, можете войти в аккаунт")
         props.history.push('/signin')
       })
       .catch((e) => {
@@ -37,15 +35,7 @@ const RegistrationFormContainer = props => {
           values.login = "";
           values.password = "";
           values.password_2 = "";
-          setErrMessage({
-            status: true,
-            text: 'Пользователь с таким логином уже существует!'
-          });
-          setTimeout(() => {
-            setErrMessage({
-              status: false
-            })
-          }, 3000);
+          toast.error("Пользователь с таким логином уже существует!")
         }
 
         if (positionOfError.includes('email')) {
@@ -55,17 +45,8 @@ const RegistrationFormContainer = props => {
           values.email = "";
           values.password = "";
           values.password_2 = "";
-          setErrMessage({
-            status: true,
-            text: 'Пользователь с такой почтой уже сущесвтвует!'
-          });
-          setTimeout(() => {
-            setErrMessage({
-              status: false
-            })
-          }, 3000);
+          toast.error("Пользователь с такой почтой уже существует!")
         }
-        
       })
   }
 
@@ -80,7 +61,6 @@ const RegistrationFormContainer = props => {
 } = useValidateForm(INITIAL_STATE, validateRegistration, submitFunction);
 
   return (
-
     <FormUI 
       handleSubmit={handleSubmit}
       handleChange={handleChange}
@@ -88,10 +68,8 @@ const RegistrationFormContainer = props => {
       errors={errors}
       values={values}
       isSubmitting={isSubmitting}
-      errMessage={errMessage}
       isRegistration
     />
-
   )
 };
 

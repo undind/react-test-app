@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormUI from 'components/Form';
+import { toast } from "react-toastify";
 
 import db from 'db';
 
@@ -7,10 +8,6 @@ import useValidateForm from 'hooks/useValidateForm';
 import validateLogin from 'utils/validateLogin';
 
 const LoginFormContainer = props => {
-  const [errMessage, setErrMessage] = useState({
-    status: false,
-    text: ''
-  });
 
   const INITIAL_STATE = {
     login: '',
@@ -20,33 +17,18 @@ const LoginFormContainer = props => {
   const submitFunction = async () => {
     const { login, password } = values;
 
-    await db.users.get({login}, user => user.password === password).then((auth) => {
+    await db.users.get({ login }, user => user.password === password).then((auth) => {
       if (auth) {
+        toast.success("Добро пожаловать!")
         window.localStorage.setItem('isAuth', 'true');
         props.history.push('/');
       } else {
         values.password = "";
-        setErrMessage({
-          status: true,
-          text: 'Введен не верный логин или пароль'
-        });
-        setTimeout(() => {
-          setErrMessage({
-            status: false
-          });
-        }, 3000);
+        toast.error("Введен не верный логин или пароль")
       }
-    }).catch((e) => {
+    }).catch(() => {
       values.password = "";
-      setErrMessage({
-        status: true,
-        text: 'Такой пользователь не зарегистрирован!'
-      });
-      setTimeout(() => {
-        setErrMessage({
-          status: false
-        });
-      }, 3000);
+      toast.error("Такой пользователь не зарегистрирован!")
     })
   }
 
@@ -67,7 +49,6 @@ const LoginFormContainer = props => {
       values={values}
       errors={errors}
       isSubmitting={isSubmitting}
-      errMessage={errMessage}
       isLogin
     />
   )

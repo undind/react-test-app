@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 
-import { Container, Col, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
+import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 
-const FormUI = ({ isLogin, isRegistration, handleSubmit, handleChange, handleBlur, values, errors, isSubmitting, errMessage }) => {
+const FormUI = ({ isLogin, isRegistration, handleSubmit, handleChange, handleBlur, values, errors, isSubmitting }) => {
   return (
     <Container className="vh-100">
-      {errMessage.status && <Alert color="danger" className="text-center fixed-top">
-        {errMessage.text}
-      </Alert>}
       <div className="d-flex align-items-center justify-content-center h-100">
         <div className="text-center">
           {isLogin ? (

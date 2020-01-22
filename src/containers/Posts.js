@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { postsAction } from 'redux/actions';
 
@@ -29,17 +31,20 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <PostsUI 
-      posts={posts}
-      isLoading={isLoading}
-      isError={isError}
-      searchValue={searchValue}
-      handleSearchInputChanges={handleSearchInputChanges}
-      currentPosts={currentPosts}
-      filteredPosts={filteredPosts}
-      paginate={paginate}
-      postsPerPage={postsPerPage}
-    />
+    <Fragment>
+      <PostsUI 
+        posts={posts}
+        isLoading={isLoading}
+        isError={isError}
+        searchValue={searchValue}
+        handleSearchInputChanges={handleSearchInputChanges}
+        currentPosts={currentPosts}
+        filteredPosts={filteredPosts}
+        paginate={paginate}
+        postsPerPage={postsPerPage}
+      />
+      <ToastContainer autoClose={2000} />
+    </Fragment>
   );
 }
 

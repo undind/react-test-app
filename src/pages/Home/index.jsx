@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 import { Container, Button, NavItem, Navbar } from 'reactstrap';
 import { Posts } from 'containers';
@@ -9,7 +10,10 @@ const Home = () => {
   const [ modal, setModal]  = useState(false);
   let history = useHistory();
 
+  console.log(toast)
+
   const logOut = () => {
+    toast.info("Вы покинули аккаунт!")
     window.localStorage.setItem('isAuth', 'false');
     history.push('/signin');
   }
