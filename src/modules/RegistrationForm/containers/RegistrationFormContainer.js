@@ -85,7 +85,7 @@ const renderColumnForm = () => {
     },
     {
       name: 'password_2',
-      type: 'password_2',
+      type: 'password',
       placeholder: 'Повторите пароль',
       value: values.password_2,
       error: errors.password_2
@@ -99,8 +99,6 @@ const renderColumnForm = () => {
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       handleBlur={handleBlur}
-      errors={errors}
-      values={values}
       isSubmitting={isSubmitting}
       renderColumnForm={renderColumnForm}
     />

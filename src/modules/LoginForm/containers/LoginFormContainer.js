@@ -65,8 +65,6 @@ const LoginFormContainer = props => {
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       handleBlur={handleBlur}
-      values={values}
-      errors={errors}
       isSubmitting={isSubmitting}
       renderColumnForm={renderColumnForm}
       isLogin
