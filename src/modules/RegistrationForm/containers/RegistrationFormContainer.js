@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RegistrationForm from '../components/RegistrationForm';
+import { FormUI } from 'components';
 
 import db from 'db';
 
@@ -81,7 +81,7 @@ const RegistrationFormContainer = props => {
 
   return (
 
-    <RegistrationForm 
+    <FormUI 
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       handleBlur={handleBlur}
@@ -89,6 +89,7 @@ const RegistrationFormContainer = props => {
       values={values}
       isSubmitting={isSubmitting}
       errMessage={errMessage}
+      isRegistration
     />
 
   )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginForm from "../components/LoginForm";
+import { FormUI } from 'components';
 
 import db from 'db';
 
@@ -60,7 +60,7 @@ const LoginFormContainer = props => {
   } = useValidateForm(INITIAL_STATE, validateLogin, submitFunction);
 
   return (
-    <LoginForm 
+    <FormUI 
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       handleBlur={handleBlur}
@@ -68,6 +68,7 @@ const LoginFormContainer = props => {
       errors={errors}
       isSubmitting={isSubmitting}
       errMessage={errMessage}
+      isLogin
     />
   )
 };

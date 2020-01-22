@@ -1,3 +1,5 @@
+import { SET_POSTS, SET_ERROR, SET_LOADING } from '../types';
+
 const initialState = {
   posts: [],
   isError: false,
@@ -6,17 +8,17 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case "POSTS:SET_POSTS":
+    case SET_POSTS:
       return {
         posts: payload
       }
 
-    case 'POSTS:IS_ERROR':
+    case SET_ERROR:
       return {
         ...state,
         isError: payload,
       };
-    case 'POSTS:IS_LOADING':
+    case SET_LOADING:
       return {
         ...state,
         isLoading: payload,

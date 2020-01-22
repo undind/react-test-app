@@ -1,18 +1,19 @@
 import { postsAPI } from "utils/api";
+import { SET_POSTS, SET_ERROR, SET_LOADING } from '../types';
 
 const Actions = {
   setPosts: posts => ({
-    type: "POSTS:SET_POSTS",
+    type: SET_POSTS,
     payload: posts
   }),
 
   setIsError: bool => ({
-    type: "POSTS:IS_ERROR",
+    type: SET_ERROR,
     payload: bool
   }),
 
   setIsLoading: bool => ({
-    type: "POSTS:IS_LOADING",
+    type: SET_LOADING,
     payload: bool
   }),
 
