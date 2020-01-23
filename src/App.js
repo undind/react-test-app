@@ -20,6 +20,7 @@ const App = () => {
       <Switch>
         <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/" /> : <Auth /> ) } />
         <Route path="/" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
+        <Redirect from="*" to="/" />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar={true} />
     </div>

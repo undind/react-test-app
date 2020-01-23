@@ -34,7 +34,7 @@ const FormUI = ({ handleSubmit, handleChange, handleBlur, isSubmitting, renderCo
               </Col>
             ))}
 
-            <Button disabled={isSubmitting} color="primary" className="btn-lg btn-block mb-4">{btnText}</Button>
+            <Button type="submit" disabled={isSubmitting} color="primary" className="btn-lg btn-block mb-4">{btnText}</Button>
             <Link to={linkTo}>{linkText}</Link>
           </Form>
 
