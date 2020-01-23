@@ -48,7 +48,12 @@ const LoginFormContainer = props => {
         type: 'text',
         placeholder: 'Ваш логин',
         value: values.login,
-        error: errors.login
+        error: errors.login,
+        heading: 'Вход в аккаунт',
+        paragraf: 'Пожалуйста, войдите в свой аккаунт',
+        btnText: 'Войти в аккаунт',
+        linkText: 'Зарегестрироваться',
+        linkTo: '/signup'
       },
       {
         name: 'password',

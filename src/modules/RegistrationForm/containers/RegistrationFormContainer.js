@@ -22,8 +22,8 @@ const RegistrationFormContainer = props => {
     await db.users
       .add({ login, email, password, password_2 })
       .then(() => {
-        toast.success("Регистрация прошла успешно, можете войти в аккаунт")
         props.history.push('/signin')
+        toast.success("Регистрация прошла успешно, можете войти в аккаунт")
       })
       .catch((e) => {
         const positionOfError = e.message;
@@ -67,7 +67,12 @@ const renderColumnForm = () => {
       type: 'text',
       placeholder: 'Ваш логин',
       value: values.login,
-      error: errors.login
+      error: errors.login,
+      heading: 'Регистрация',
+      paragraf: `Для входа в аккаунт, пожалуйста зарегистрируйтесь`,
+      btnText: 'Зарегестрироваться',
+      linkText: 'Войти в аккаунт',
+      linkTo: '/signin'
     },
     {
       name: 'email',

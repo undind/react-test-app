@@ -1,24 +1,18 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 
-const FormUI = ({ isLogin, handleSubmit, handleChange, handleBlur, isSubmitting, renderColumnForm }) => {
+const FormUI = ({ handleSubmit, handleChange, handleBlur, isSubmitting, renderColumnForm }) => {
+  const { heading, paragraf, linkTo, btnText, linkText } = renderColumnForm()[0];
+
   return (
     <Container className="vh-100">
       <div className="d-flex align-items-center justify-content-center h-100">
         <div className="text-center">
-          {isLogin ? (
-            <Fragment>
-              <h2>Вход в аккаунт</h2>
-              <p className="lead">Пожалуйста, войдите в свой аккаунт</p>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <h2>Регистрация</h2>
-              <p className="lead">Для входа в аккаунт,<br /> пожалуйста зарегистрируйтесь</p>
-            </Fragment>
-          )}
+
+          <h2>{heading}</h2>
+          <p className="lead">{paragraf}</p>
 
           <Form onSubmit={handleSubmit} className="form d-flex flex-column bg-white text-center rounded p-4 shadow">
             {renderColumnForm().map((item, i)=> (
@@ -39,22 +33,9 @@ const FormUI = ({ isLogin, handleSubmit, handleChange, handleBlur, isSubmitting,
                 </FormGroup>
               </Col>
             ))}
-            {isLogin ? (
-              <Fragment>
-                <Button disabled={isSubmitting} color="primary" className="btn-lg btn-block mb-4">Войти в аккаунт</Button>
-                <Link to="/signup">Зарегестрироваться</Link>
-              </Fragment>
-              ) : (
-              <Fragment>
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting} 
-                  color="primary" 
-                  className="btn-lg btn-block mb-4"
-                >Зарегестрироваться</Button>
-                <Link to="/signin">Войти в аккаунт</Link>
-              </Fragment>
-            )}
+
+            <Button disabled={isSubmitting} color="primary" className="btn-lg btn-block mb-4">{btnText}</Button>
+            <Link to={linkTo}>{linkText}</Link>
           </Form>
 
         </div>
