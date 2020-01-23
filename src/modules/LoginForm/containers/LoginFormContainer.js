@@ -41,8 +41,8 @@ const LoginFormContainer = props => {
     isSubmitting
   } = useValidateForm(INITIAL_STATE, validateLogin, submitFunction);
 
-  const renderColumnForm = () => {
-    return [
+  const renderColumnForm = 
+    [
       {
         name: 'login',
         type: 'text',
@@ -63,7 +63,7 @@ const LoginFormContainer = props => {
         error: errors.password
       }
     ]
-  }
+
 
   return (
     <FormUI 

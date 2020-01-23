@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Container, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 
 const FormUI = ({ handleSubmit, handleChange, handleBlur, isSubmitting, renderColumnForm }) => {
-  const { heading, paragraf, linkTo, btnText, linkText } = renderColumnForm()[0];
+  const { heading, paragraf, linkTo, btnText, linkText } = renderColumnForm[0];
 
   return (
     <Container className="vh-100">
@@ -12,10 +12,10 @@ const FormUI = ({ handleSubmit, handleChange, handleBlur, isSubmitting, renderCo
         <div className="text-center">
 
           <h2>{heading}</h2>
-          <p className="lead">{paragraf}</p>
+          <p className="lead" style={{maxWidth: '400px', width: '400px'}}>{paragraf}</p>
 
           <Form onSubmit={handleSubmit} className="form d-flex flex-column bg-white text-center rounded p-4 shadow">
-            {renderColumnForm().map((item, i)=> (
+            {renderColumnForm.map((item, i)=> (
               <Col key={i} className="mt-3 mb-2 mr-5 p-0">
                 <FormGroup className="text-left position-relative">
                   <Input
