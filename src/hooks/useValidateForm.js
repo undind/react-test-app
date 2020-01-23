@@ -11,8 +11,9 @@ const useFormValidation = (initialState, validate, runOnSubmit) => {
       const noErrors = Object.keys(errors).length === 0;
       if (noErrors) {
         setTouched([]);
-        setSubmitting(false);
+        setSubmitting(true);
         runOnSubmit();
+        setSubmitting(false);
       } else {
         setSubmitting(false);
       }
@@ -62,9 +63,10 @@ const useFormValidation = (initialState, validate, runOnSubmit) => {
     handleChange,
     handleBlur,
     values,
+    setValues,
     errors,
     isSubmitting,
-    setErrors
+    setSubmitting
   };
 }
 

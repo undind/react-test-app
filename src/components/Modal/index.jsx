@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from "prop-types";
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const ModalWindow = ({ modal, logOut, onеToggleModal }) => {
@@ -17,6 +19,12 @@ const ModalWindow = ({ modal, logOut, onеToggleModal }) => {
       </Modal>
     </div>
   );
+}
+
+ModalWindow.propTypes = {
+  modal: PropTypes.bool,
+  logOut: PropTypes.func,
+  onеToggleModal: PropTypes.func
 }
 
 export default ModalWindow;

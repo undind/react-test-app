@@ -7,7 +7,7 @@ import { Posts } from 'containers';
 import ModalWindow from 'components/Modal';
 
 const Home = () => {
-  const [ modal, setModal]  = useState(false);
+  const [ modal, setModal ]  = useState(false);
   let history = useHistory();
 
   const logOut = () => {
