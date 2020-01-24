@@ -13,7 +13,8 @@ const PostsUI = ({
   currentPosts,
   filteredPosts,
   paginate,
-  postsPerPage
+  postsPerPage,
+  currentPage
 }) => {
   return (
     <Fragment>
@@ -46,9 +47,10 @@ const PostsUI = ({
               postsPerPage={postsPerPage}
               totalPosts={filteredPosts.length}
               paginate={paginate}
+              currentPage={currentPage}
             />
             <ul className="mt-3 p-0">
-              {!currentPosts.length && !filteredPosts.length ? (
+              {!isLoading && !currentPosts.length && !filteredPosts.length ? (
                 <h2 className="text-center">Ничего не найдено</h2>
               ) : !currentPosts.length ? (
                 filteredPosts.map(post => (

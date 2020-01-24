@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import { postsAction } from "redux/actions";
 
-import PostsUI from "components/Posts/index.jsx";
+import PostsUI from "components/Posts";
 import { useLocation } from "react-router-dom";
 
 const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
-  let numberPage = params.get('page') || "1";
+  let numberPage = params.get('page');
   
   const [currentPage, setCurrentPage] = useState(Number(numberPage));
   const [postsPerPage] = useState(5);
@@ -28,11 +28,11 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
       post.title
         .replace(/\s/g, "")
         .toLowerCase()
-        .includes(searchValue.replace(/\s/gi, "").toLowerCase()) ||
+        .includes(searchValue.replace(/\s/g, "").toLowerCase()) ||
       post.text
         .replace(/\s/g, "")
         .toLowerCase()
-        .includes(searchValue.replace(/\s/gi, "").toLowerCase())
+        .includes(searchValue.replace(/\s/g, "").toLowerCase())
   );
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -52,6 +52,7 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
       filteredPosts={filteredPosts}
       paginate={paginate}
       postsPerPage={postsPerPage}
+      currentPage={currentPage}
     />
   );
 };

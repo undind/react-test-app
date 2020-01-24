@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
 
   const pageNumbers = [];
 
@@ -14,7 +14,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     <nav className="d-flex align-items-center justify-content-center">
       <ul className='pagination mt-2'>
         {pageNumbers.length === 1 ? '' : pageNumbers.map(number => (
-          <li key={number} className='page-item'>
+          <li key={number} className={currentPage === number ? 'page-item active' : 'page-item'}>
             <Link to={{ pathname: '/home', search: `?page=${number}` }} onClick={() => paginate(number)} className='page-link'>
               {number}
             </Link>

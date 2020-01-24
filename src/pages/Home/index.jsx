@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 import { Container, Button, NavItem, Navbar } from 'reactstrap';
-import { Posts } from 'containers';
+import Posts from 'containers/Posts';
 import ModalWindow from 'components/Modal';
 
 const Home = () => {

@@ -3,7 +3,8 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Auth, Home } from './pages';
+import Auth from 'pages/Auth';
+import Home from 'pages/Home';
 
 const App = () => {
   const getLocalAuth = () => {
@@ -18,8 +19,12 @@ const App = () => {
   return (
     <div className="wrapper">
       <Switch>
-        <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/" /> : <Auth /> ) } />
-        <Route path="/" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
+        <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/home" /> : <Auth /> ) } />
+        <Route path="/home" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
+        <Redirect from="/" to={{
+          pathname: "/home",
+          search: "?page=1"
+        }} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar={true} />
     </div>
