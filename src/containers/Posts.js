@@ -10,8 +10,8 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
   let numberPage = params.get('page');
-  
-  const [currentPage, setCurrentPage] = useState(Number(numberPage));
+
+  const [currentPage, setCurrentPage] = useState(Number(numberPage) === 0 ? 1 : Number(numberPage));
   const [postsPerPage] = useState(5);
 
   useEffect(() => {
