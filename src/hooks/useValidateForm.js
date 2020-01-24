@@ -33,7 +33,7 @@ const useFormValidation = (initialState, validate, runOnSubmit) => {
       }, {})
     setErrors(touchedErrors);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [touched, values]);
+  }, [touched]);
 
   const handleChange = (event) => {
     setValues({

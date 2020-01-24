@@ -1,73 +1,52 @@
 import React from "react";
 import FormUI from "components/Form";
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-
-import db from "db";
+import { connect } from "react-redux";
+import usersActions from "redux/actions/users";
 
 import useValidateForm from "hooks/useValidateForm";
 import validateLogin from "utils/validateLogin";
 import validateRegistration from "utils/validateRegistration";
 
-const FormContainer = ({ INITIAL_STATE, isSignin }) => {
+const FormContainer = ({
+  INITIAL_STATE,
+  isSignin,
+  fetchAuth,
+  fetchRegistr
+}) => {
   let history = useHistory();
 
-  const submitFunction = async () => {
+  const submitFunction = () => {
     const { login, email, password, password_2 } = values;
 
     if (isSignin) {
-      await db.users
-        .get({ login }, user => user.password === password)
-        .then(auth => {
-          if (auth) {
-            toast.success("Добро пожаловать!");
-            window.localStorage.setItem("isAuth", "true");
-            setSubmitting(true)
-            history.push("/");
-          } else {
-            setValues({
-              ...values,
-              password: ''
-            })
-            toast.error("Введен не верный логин или пароль");
+      fetchAuth({ login, password })
+        .then(result => {
+          if (result) {
+            setSubmitting(true);
+            setTimeout(() => {
+              history.push("/");
+            }, 2000);
           }
         })
         .catch(() => {
-          values.password = "";
-          toast.error("Такой пользователь не зарегистрирован!");
+          return null;
         });
     } else {
-      await db.users
-        .add({ login, email, password, password_2 })
-        .then(() => {
+      fetchRegistr({ login, email, password, password_2 }).then(result => {
+        if (result) {
           setSubmitting(true);
-          history.push("/signin");
-          toast.success("Регистрация прошла успешно, можете войти в аккаунт");
-        })
-        .catch(e => {
-          const positionOfError = e.message;
+          return history.push("/signin");
+        }
 
-          if (positionOfError.includes("login")) {
-            setValues({
-              ...values,
-              login: '',
-              password: '',
-              password_2: ''
-            })
-            toast.error("Пользователь с таким логином уже существует!");
-          }
-
-          if (positionOfError.includes("email")) {
-            setValues({
-              ...values,
-              email: '',
-              password: '',
-              password_2: ''
-            })
-            toast.error("Пользователь с такой почтой уже существует!");
-          }
+        setValues({
+          login: "",
+          email: "",
+          password: "",
+          password_2: ""
         });
+      });
     }
   };
 
@@ -88,15 +67,27 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
 
   const renderFormColumnsInput = (obj, isSignin) => {
     const arr = Object.keys(obj).map(item => {
-      let placeholderText = item === 'password' ? 'пароль' : item === 'email' ? 'email' : item === 'password_2' ? 'повторно пароль' : 'логин';  
+      let placeholderText =
+        item === "password"
+          ? "пароль"
+          : item === "email"
+          ? "email"
+          : item === "password_2"
+          ? "повторно пароль"
+          : "логин";
       return {
         name: item,
-        type: item === 'password' || item === 'password_2' ? 'password' : item === 'email' ? 'email' : 'text',
+        type:
+          item === "password" || item === "password_2"
+            ? "password"
+            : item === "email"
+            ? "email"
+            : "text",
         placeholder: `Введите ${placeholderText}`,
         value: values[item],
         error: errors[item]
-      }
-    })
+      };
+    });
 
     const signInInfo = {
       heading: "Вход в аккаунт",
@@ -104,7 +95,7 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
       btnText: "Войти в аккаунт",
       linkText: "Зарегестрироваться",
       linkTo: "/signup"
-    }
+    };
 
     const signUpInfo = {
       heading: "Регистрация",
@@ -112,16 +103,16 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
       btnText: "Зарегестрироваться",
       linkText: "Войти в аккаунт",
       linkTo: "/signin"
-    }
+    };
 
     if (isSignin) {
-      arr[0] = { ...arr[0], ...signInInfo }
+      arr[0] = { ...arr[0], ...signInInfo };
     } else {
-      arr[0] = { ...arr[0], ...signUpInfo }
+      arr[0] = { ...arr[0], ...signUpInfo };
     }
 
     return arr;
-  }
+  };
 
   return (
     <FormUI
@@ -129,14 +120,18 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
       handleChange={handleChange}
       handleBlur={handleBlur}
       isSubmitting={isSubmitting}
-      renderFormColumnsInput={() => renderFormColumnsInput(INITIAL_STATE, isSignin)}
+      renderFormColumnsInput={() =>
+        renderFormColumnsInput(INITIAL_STATE, isSignin)
+      }
     />
   );
 };
 
 FormContainer.propTypes = {
   INITIAL_STATE: PropTypes.object,
-  isSignin: PropTypes.bool
+  isSignin: PropTypes.bool,
+  fetchAuth: PropTypes.func,
+  fetchRegistr: PropTypes.func
 };
 
-export default FormContainer;
+export default connect(({ users }) => users, usersActions)(FormContainer);

@@ -18,7 +18,7 @@ const FormUI = ({
     btnText,
     linkText
   } = renderFormColumnsInput()[0];
-  
+
   return (
     <Container className="vh-100">
       <div className="d-flex align-items-center justify-content-center h-100">
@@ -43,6 +43,7 @@ const FormUI = ({
                     value={item.value || ""}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    disabled={isSubmitting}
                   />
                   {item.error && (
                     <div className="invalid-tooltip">{item.error}</div>
@@ -55,11 +56,14 @@ const FormUI = ({
               type="submit"
               disabled={isSubmitting}
               color="primary"
-              className="btn-lg btn-block mb-4"
+              className="btn-lg btn-block mb-4 d-flex justify-content-center align-items-center"
             >
+              {isSubmitting && (
+                <span className="spinner-border spinner-border-sm mr-3"></span>
+              )}
               {btnText}
             </Button>
-            <Link to={linkTo}>{linkText}</Link>
+            {!isSubmitting && <Link to={linkTo}>{linkText}</Link>}
           </Form>
         </div>
       </div>
