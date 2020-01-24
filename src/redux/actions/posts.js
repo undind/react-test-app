@@ -1,4 +1,4 @@
-import { postsAPI } from "utils/api";
+import postsAPI from "utils/api/posts";
 import { SET_POSTS, SET_ERROR, SET_LOADING } from '../types';
 
 const Actions = {

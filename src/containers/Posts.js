@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { postsAction } from "redux/actions";
+import postsAction from "redux/actions/posts";
 
 import PostsUI from "components/Posts";
 import { useLocation } from "react-router-dom";
