@@ -21,11 +21,11 @@ const App = () => {
       <Switch>
         <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/home" /> : <Auth /> ) } />
         <Route path="/home" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
-      </Switch>
-      <Redirect from="/" to={{
+        <Redirect from="/" to={{
           pathname: "/home",
           search: "?page=1"
         }} />
+      </Switch>
       <ToastContainer autoClose={3000} hideProgressBar={true} />
     </div>
   );
