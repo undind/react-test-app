@@ -41,7 +41,7 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
       await db.users
         .add({ login, email, password, password_2 })
         .then(() => {
-          setSubmitting(true)
+          setSubmitting(true);
           history.push("/signin");
           toast.success("Регистрация прошла успешно, можете войти в аккаунт");
         })
@@ -88,7 +88,7 @@ const FormContainer = ({ INITIAL_STATE, isSignin }) => {
 
   const renderFormColumnsInput = (obj, isSignin) => {
     const arr = Object.keys(obj).map(item => {
-      let placeholderText = item === 'password' || item === 'password_2' ? 'пароль' : item === 'email' ? 'email' : 'логин';  
+      let placeholderText = item === 'password' ? 'пароль' : item === 'email' ? 'email' : item === 'password_2' ? 'повторно пароль' : 'логин';  
       return {
         name: item,
         type: item === 'password' || item === 'password_2' ? 'password' : item === 'email' ? 'email' : 'text',

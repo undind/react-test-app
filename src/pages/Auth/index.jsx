@@ -18,7 +18,7 @@ const Auth = () => {
   
   return (
     <section className="auth">
-      <Route exact path="/signin" component={() => <FormContainer INITIAL_STATE={INITIAL_STATE_SIGNIN} isSignin />} />
+      <Route exact path="/signin" component={() => <FormContainer INITIAL_STATE={INITIAL_STATE_SIGNIN} isSignin={true} />} />
       <Route exact path="/signup" component={() => <FormContainer INITIAL_STATE={INITIAL_STATE_SIGNUP} isSignin={false} />} />
     </section>
   );
