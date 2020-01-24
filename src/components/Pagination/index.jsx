@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -13,9 +15,9 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       <ul className='pagination mt-2'>
         {pageNumbers.length === 1 ? '' : pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <button onClick={() => paginate(number)} className='page-link'>
+            <Link to={{ pathname: '/home', search: `?page=${number}` }} onClick={() => paginate(number)} className='page-link'>
               {number}
-            </button>
+            </Link>
           </li>
         ))}
       </ul>

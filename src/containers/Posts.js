@@ -4,9 +4,14 @@ import { connect } from "react-redux";
 import { postsAction } from "redux/actions";
 
 import PostsUI from "components/Posts/index.jsx";
+import { useLocation } from "react-router-dom";
 
 const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  let location = useLocation();
+  let params = new URLSearchParams(location.search);
+  let numberPage = params.get('page') || "1";
+  
+  const [currentPage, setCurrentPage] = useState(Number(numberPage));
   const [postsPerPage] = useState(5);
 
   useEffect(() => {
