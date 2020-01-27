@@ -3,7 +3,7 @@ import { SET_IS_REGIST, SET_USER_DATA, SET_IS_AUTH } from "../types";
 const initialState = {
   userData: {},
   isRegistr: false,
-  isAuth: null
+  isAuth: false
 };
 
 export default (state = initialState, { type, payload }) => {

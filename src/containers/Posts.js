@@ -11,7 +11,7 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   let params = new URLSearchParams(location.search);
   let numberPage = params.get('page');
 
-  const [currentPage, setCurrentPage] = useState(Number(numberPage));
+  const [currentPage, setCurrentPage] = useState(Number(numberPage) || 1);
   const [postsPerPage] = useState(5);
 
   useEffect(() => {

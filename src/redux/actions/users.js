@@ -27,6 +27,7 @@ const Actions = {
           toast.error("Введен не верный логин или пароль");
           return auth;
         } else {
+          
           dispatch(Actions.setUserData({ login, password }));
           dispatch(Actions.setUserIsAuth(true));
 
