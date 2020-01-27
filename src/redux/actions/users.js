@@ -1,4 +1,4 @@
-import { SET_IS_REGIST, SET_USER_DATA } from "../types";
+import { SET_IS_REGIST, SET_USER_DATA, SET_IS_AUTH } from "../types";
 
 import { toast } from "react-toastify";
 import db from "db";
@@ -14,18 +14,28 @@ const Actions = {
     payload: bool
   }),
 
+  setUserIsAuth: bool => ({
+    type: SET_IS_AUTH,
+    payload: bool
+  }),
+
   fetchAuth: ({ login, password }) => dispatch => {
     return db.users
-      .get({ login }, user => user.password === password)
+      .get({ login }, user => (user.password === password ? user.id : null))
       .then(auth => {
         if (!auth) {
           toast.error("Введен не верный логин или пароль");
-          return false;
+          return auth;
         } else {
           dispatch(Actions.setUserData({ login, password }));
+          dispatch(Actions.setUserIsAuth(true));
+
           toast.success("Добро пожаловать!");
+
           window.localStorage.setItem("isAuth", "true");
-          return true;
+          window.localStorage.setItem("userId", auth);
+          
+          return auth;
         }
       })
       .catch(() => {
@@ -37,7 +47,7 @@ const Actions = {
   fetchRegistr: ({ login, email, password, password_2 }) => dispatch => {
     return db.users
       .add({ login, email, password, password_2 })
-      .then(() => {
+      .then(id => {
         toast.success("Регистрация прошла успешно, можете войти в аккаунт");
         dispatch(Actions.setIsRegistr(true));
         return true;
@@ -55,7 +65,20 @@ const Actions = {
           return false;
         }
       });
-  }
+  },
+
+  getUserData: () => dispatch => {
+    const userId = Number(window.localStorage.getItem('userId'));
+    return db.users
+      .get(userId)
+      .then(({ login, password }) => {
+        dispatch(Actions.setUserData({ login, password }));
+        dispatch(Actions.setUserIsAuth(true));
+      })
+      .catch(() => {
+        dispatch(Actions.setUserIsAuth(false));
+      });
+  },
 };
 
 export default Actions;

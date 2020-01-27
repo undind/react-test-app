@@ -1,11 +1,9 @@
-import {
-  SET_IS_REGIST,
-  SET_USER_DATA
-} from "../types";
+import { SET_IS_REGIST, SET_USER_DATA, SET_IS_AUTH } from "../types";
 
 const initialState = {
   userData: {},
-  isRegistr: false
+  isRegistr: false,
+  isAuth: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -19,6 +17,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isRegistr: payload
+      };
+
+    case SET_IS_AUTH:
+      return {
+        ...state,
+        isAuth: payload
       };
 
     default:

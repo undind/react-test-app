@@ -22,16 +22,24 @@ const FormContainer = ({
 
     if (isSignin) {
       fetchAuth({ login, password })
-        .then(result => {
-          if (result) {
+        .then(auth => {
+          if (auth) {
             setSubmitting(true);
             setTimeout(() => {
               history.push("/");
             }, 2000);
+          } else {
+            setValues({
+              login: "",
+              password: ""
+            });
           }
         })
         .catch(() => {
-          return null;
+          setValues({
+            login: "",
+            password: ""
+          });
         });
     } else {
       fetchRegistr({ login, email, password, password_2 }).then(result => {
@@ -134,4 +142,4 @@ FormContainer.propTypes = {
   fetchRegistr: PropTypes.func
 };
 
-export default connect(({ users }) => users, usersActions)(FormContainer);
+export default connect((users) => users, usersActions)(FormContainer);
