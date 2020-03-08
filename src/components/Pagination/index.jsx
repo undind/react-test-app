@@ -1,13 +1,28 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import _ from "lodash";
 import qs from "qs";
 
-const PaginationComponent = ({ numberPage, totalPages, onClickFunc, pagesLimit }) => {
+const PaginationComponent = ({
+  postsPerPage,
+  totalPosts,
+  paginate,
+  forPosts,
+  numberPage,
+  totalPages,
+  onClickFunc,
+  pagesLimit
+}) => {
   let location = useLocation();
   let history = useHistory();
+
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   const onClickFuncComponent = n => {
     if (onClickFunc !== undefined) {
@@ -53,8 +68,33 @@ const PaginationComponent = ({ numberPage, totalPages, onClickFunc, pagesLimit }
     return pages;
   };
 
+  if (forPosts) {
+    return (
+      <nav className="d-flex align-items-center justify-content-center">
+        <ul className="pagination mt-2">
+          {pageNumbers.length === 1
+            ? ""
+            : pageNumbers.map(number => (
+                <li
+                  key={number}
+                  className={numberPage === number ? "page-item active" : "page-item"}
+                >
+                  <Link
+                    to={{ pathname: "/home", search: `?page=${number}` }}
+                    onClick={() => paginate(number)}
+                    className="page-link"
+                  >
+                    {number}
+                  </Link>
+                </li>
+              ))}
+        </ul>
+      </nav>
+    );
+  }
+
   return (
-    <Pagination>
+    <Pagination className='mt-3 mb-3 d-flex justify-content-center'>
       {totalPages > 1 ? (
         <>
           <PaginationItem
@@ -90,6 +130,10 @@ PaginationComponent.propTypes = {
   numberPage: PropTypes.number,
   totalPages: PropTypes.number,
   pagesLimit: PropTypes.number,
+  postsPerPage: PropTypes.number,
+  totalPosts: PropTypes.number,
+  forPosts: PropTypes.bool,
+  paginate: PropTypes.func,
   onClickFunc: PropTypes.func
 };
 
