@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
-import { Table, Input } from "reactstrap";
+import { Table, Input, Button } from "reactstrap";
 // import PropTypes from "prop-types";
 
 import Pagination from "components/Pagination";
 import { Container } from "reactstrap";
 
-const TicketsUI = ({ pagination, tickets, onClickFunc }) => {
+const TicketsUI = ({ pagination, tickets }) => {
   return (
     <Fragment>
       <Container>
@@ -35,7 +35,10 @@ const TicketsUI = ({ pagination, tickets, onClickFunc }) => {
                   </td>
                   <td>{item.id}</td>
                   <td>{item.login}</td>
-                  <td>{item.subject}</td>
+                  <td>
+                    <span>{item.subject}</span>
+                    <Button outline color="secondary" size="sm" className='ml-2'>Edit</Button>
+                  </td>
                   <td>{item.status_name}</td>
                 </tr>
               );

@@ -43,7 +43,9 @@ const Home = ({ users, setUserIsAuth }) => {
             modal={modal}
             logOut={logOut}
             onеToggleModal={onеToggleModal}
-          />
+          >
+            Are you sure?
+          </ModalWindow>
         </Container>
       </div>
 
