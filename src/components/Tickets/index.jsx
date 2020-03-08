@@ -12,7 +12,7 @@ const TicketsUI = ({ pagination, tickets, onClickFunc }) => {
         <Pagination
           totalPages={pagination?.pages}
           numberPage={pagination?.current_page}
-          onClickFunc={onClickFunc}
+          pagesLimit={10}
         />
         <Table className="tickets-table">
           <thead>
