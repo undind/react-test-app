@@ -17,3 +17,9 @@ li, ul {
   margin: 0;
   list-style: none;
 }
+
+.tickets-table .form-check-input {
+  position: relative;
+  margin-top: 0;
+  margin-left: 0;
+}

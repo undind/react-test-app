@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-import Pagination from "components/Pagination";
+// import Pagination from "components/Pagination";
 import { Container, Spinner } from "reactstrap";
 
 const PostsUI = ({
@@ -43,12 +43,12 @@ const PostsUI = ({
                 onChange={handleSearchInputChanges}
               />
             </div>
-            <Pagination
+            {/* <Pagination
               postsPerPage={postsPerPage}
               totalPosts={filteredPosts.length}
               paginate={paginate}
               currentPage={currentPage}
-            />
+            /> */}
             <ul className="mt-3 p-0">
               {!isLoading && !currentPosts.length && !filteredPosts.length ? (
                 <h2 className="text-center">Ничего не найдено</h2>

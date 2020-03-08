@@ -39,8 +39,6 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
   return (
     <PostsUI
       posts={posts}
@@ -50,7 +48,6 @@ const Posts = ({ fetchPosts, posts, isError, isLoading }) => {
       handleSearchInputChanges={handleSearchInputChanges}
       currentPosts={currentPosts}
       filteredPosts={filteredPosts}
-      paginate={paginate}
       postsPerPage={postsPerPage}
       currentPage={currentPage}
     />

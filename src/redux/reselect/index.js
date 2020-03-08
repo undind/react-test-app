@@ -1,10 +1,17 @@
 import { createSelector } from 'reselect';
 
-const getUser = (state) => state.userData;
+const getTickets = (state) => state.tickets;
 
-const selectUser = createSelector(
-  getUser,
-  (userData) => userData
+const selecTickets = createSelector(
+  getTickets,
+  (ticketsState) => {
+    console.log(ticketsState)
+    const { tickets } = ticketsState;
+    const { data } = tickets;
+    const { pagination } = data;
+    console.log(pagination)
+    return pagination;
+  }
 );
 
-export default selectUser;
+export default selecTickets;
