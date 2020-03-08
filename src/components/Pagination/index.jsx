@@ -51,14 +51,14 @@ const PaginationComponent = ({
       startPage = 1;
       endPage = limit;
     } else {
-      if (numberPage < limit) {
+      if (numberPage + 2 < limit) {
         startPage = 1;
         endPage = limit;
       } else if (numberPage + 4 >= totalPages) {
         startPage = totalPages - limit + 1;
         endPage = totalPages;
       } else {
-        startPage = numberPage - (limit / 2 - 1);
+        startPage = numberPage - limit / 2;
         endPage = numberPage + (limit / 2 - 1);
       }
     }
@@ -94,7 +94,7 @@ const PaginationComponent = ({
   }
 
   return (
-    <Pagination className='mt-3 mb-3 d-flex justify-content-center'>
+    <Pagination className="mt-3 mb-3 d-flex justify-content-center">
       {totalPages > 1 ? (
         <>
           <PaginationItem
