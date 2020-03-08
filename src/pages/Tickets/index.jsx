@@ -5,10 +5,10 @@ import usersActions from "redux/actions/users";
 import { connect } from "react-redux";
 
 import { Container, Button, NavItem, Navbar } from 'reactstrap';
-import Posts from 'containers/Posts';
 import ModalWindow from 'components/Modal';
+import TicketsContainer from 'containers/Tickets';
 
-const Home = ({ users, setUserIsAuth }) => {
+const Tickets = ({ users, setUserIsAuth }) => {
   const [ modal, setModal ]  = useState(false);
   let history = useHistory();
 
@@ -30,7 +30,7 @@ const Home = ({ users, setUserIsAuth }) => {
         <Container>
           <Navbar className="pb-3 pt-3 pl-0 pr-0">
             <NavItem className="col-4">
-              <p className="font-weight-bold p-0 m-0 text-white">{users.userData.login}</p>
+              <Link to='/home' className="font-weight-bold p-0 m-0 text-white">{users.userData.login}</Link>
             </NavItem>
             <NavItem className="col-4 d-flex justify-content-center">
               <Link to='/tickets'>Tickets</Link>
@@ -47,10 +47,10 @@ const Home = ({ users, setUserIsAuth }) => {
         </Container>
       </div>
 
-      <Posts />
+      <TicketsContainer />
 
     </section>
   )
 };
 
-export default connect((users) => users, usersActions)(Home);
+export default connect((users) => users, usersActions)(Tickets);

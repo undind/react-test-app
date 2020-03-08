@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Auth from 'pages/Auth';
 import Home from 'pages/Home';
+import Tickets from 'pages/Tickets';
 
 const App = () => {
   const getLocalAuth = () => {
@@ -21,6 +22,7 @@ const App = () => {
       <Switch>
         <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/home" /> : <Auth /> ) } />
         <Route path="/home" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
+        <Route path="/tickets" render={ () => ( getLocalAuth() ? <Tickets /> : <Redirect push to="/signup" /> ) } />
         <Redirect from="/" to={{
           pathname: "/home",
           search: "?page=1"
