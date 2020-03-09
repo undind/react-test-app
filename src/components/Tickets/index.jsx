@@ -84,7 +84,7 @@ const TicketsUI = ({
           numberPage={pagination?.current_page}
           pagesLimit={10}
         />
-        <Button outline color="secondary" className="mb-3" onClick={addTickets}>
+        <Button outline color="secondary" className="mb-3" id='modalBtn' onClick={addTickets}>
           Add ticket
         </Button>
         <Table className="tickets-table">

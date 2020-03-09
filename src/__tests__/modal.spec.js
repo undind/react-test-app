@@ -1,9 +1,15 @@
 import React from "react";
-import { shallow } from "enzyme";
-import App from "../App";
+import { mount } from "enzyme";
+import Modal from "../components/Modal";
 
-describe("First React component test with Enzyme", () => {
-  it("renders without crashing", () => {
-    shallow(<App />);
+describe("Tests Modal", () => {
+  it("Get header text", () => {
+    const wrapper = mount(<Modal header='Add ticket' />);
+    expect(wrapper.prop('header')).toEqual('Add ticket');
+  });
+
+  it("Get button text", () => {
+    const wrapper = mount(<Modal btnText='Add ticket' />);
+    expect(wrapper.prop('btnText')).toEqual('Add ticket');
   });
 });
