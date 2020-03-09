@@ -29,7 +29,7 @@ const TicketsUI = ({
         header={modalText.header}
         btnText={modalText.btnText}
       >
-        <Form >
+        <Form>
           <Label for="subject">Subject</Label>
           <Input type="text" name="subject" id="subject" />
         </Form>
@@ -84,7 +84,7 @@ const TicketsUI = ({
           numberPage={pagination?.current_page}
           pagesLimit={10}
         />
-        <Button outline color="secondary" className="mb-3" onClick={addTickets}>
+        <Button outline color="secondary" className="mb-3" id="basic-button" onClick={addTickets}>
           Add ticket
         </Button>
         <Table className="tickets-table">

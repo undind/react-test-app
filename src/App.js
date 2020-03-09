@@ -20,9 +20,9 @@ const App = () => {
   return (
     <div className="wrapper">
       <Switch>
-        <Route path={['/signin', '/signup']} render={ () => ( getLocalAuth() ? <Redirect push to="/home" /> : <Auth /> ) } />
-        <Route path="/home" render={ () => ( getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
-        <Route path="/tickets" render={ () => ( getLocalAuth() ? <Tickets /> : <Redirect push to="/signup" /> ) } />
+        <Route path={['/signin', '/signup']} render={ () => ( !getLocalAuth() ? <Redirect push to="/home" /> : <Auth /> ) } />
+        <Route path="/home" render={ () => ( !getLocalAuth() ? <Home /> : <Redirect push to="/signup" /> ) } />
+        <Route path="/tickets" render={ () => ( !getLocalAuth() ? <Tickets /> : <Redirect push to="/signup" /> ) } />
         <Redirect from="/" to={{
           pathname: "/home",
           search: "?page=1"
