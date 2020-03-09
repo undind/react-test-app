@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const ModalWindow = ({ modal, onеToggleModal, children, header, formId }) => {
+const ModalWindow = ({ modal, onеToggleModal, children, header, formId, btnText }) => {
 
   return (
     <div>
@@ -27,6 +27,11 @@ ModalWindow.propTypes = {
   onеToggleModal: PropTypes.func,
   header: PropTypes.string,
   formId: PropTypes.string
+}
+
+ModalWindow.defaulProps = {
+  btnText: 'Add',
+  header: 'HEADER'
 }
 
 export default ModalWindow;

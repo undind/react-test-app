@@ -1,4 +1,4 @@
-import { GET_TICKETS, GET_TICKETS_SUCCESS, GET_TICKETS_ERROR } from "../types";
+import { GET_TICKETS, ADD_TICKET, GET_TICKETS_SUCCESS, ADD_TICKET_SUCCESS, GET_TICKETS_ERROR, ADD_TICKET_ERROR } from "../types";
 
 const initialState = {
   tickets: [],
@@ -10,6 +10,7 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_TICKETS:
       return {
+        ...state,
         isFething: true
       };
 
@@ -21,6 +22,24 @@ export default (state = initialState, { type, payload }) => {
       };
 
     case GET_TICKETS_ERROR:
+      return {
+        ...state,
+        isFething: false,
+        isError: true
+      };
+    case ADD_TICKET:
+      return {
+        ...state,
+        isFething: true
+      };
+
+    case ADD_TICKET_SUCCESS:
+      return {
+        ...state,
+        isFething: false
+      };
+
+    case ADD_TICKET_ERROR:
       return {
         ...state,
         isFething: false,
